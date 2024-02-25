@@ -11,14 +11,10 @@ use App\Http\Controllers\Dtos\LoginDto;
 class AuthController extends Controller
 {
 
-    private $loginService;
-
     public function __construct(
-        LoginService $loginService
+        protected LoginService $loginService
     )
-    {
-        $this->loginService = $loginService;
-    }
+    {}
 
     public function login(Request $request)
     {

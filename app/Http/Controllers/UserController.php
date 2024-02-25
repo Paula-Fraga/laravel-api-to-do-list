@@ -11,16 +11,12 @@ use App\Services\User\UpdateUserService;
 
 class UserController extends Controller
 {
-    private $create, $update;
 
     public function __construct(
-        CreateUserService $create,
-        UpdateUserService $update
+        protected CreateUserService $create,
+        protected UpdateUserService $update
     )
-    {
-        $this->create = $create;
-        $this->update = $update;
-    }
+    {}
 
     public function create(UserCreateRequest $request)
     {

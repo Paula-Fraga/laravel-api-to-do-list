@@ -57,7 +57,7 @@ Precisa do *Bearer Token*
 
 ---
 
-**User Create:** *POST* /user/create
+**User Create:** *POST* /users/create
 ```bash
 {
 	"name": "Exemplo",
@@ -72,7 +72,7 @@ Regras:
 
 ---
 
-**User Update:** *PUT* /user/update/{user_id}
+**User Update:** *PUT* /users/update/{user_id}
 
 Precisa do *Bearer Token*
 ```bash
@@ -92,39 +92,19 @@ Regras:
 * Caso ouver troca de email, não pode colocar um e-mail que já exista no sistema.
 ---
 
-**Task List:** *GET* /task/list
+**Task List:** *GET* /tasks/list
 
 Precisa do *Bearer Token*
 
 ---
 
-**Task By Id:** *GET* task/get/{task_id}
+**Task By Id:** *GET* /tasks/get/{task_id}
 
 Precisa do *Bearer Token*
 
 ---
 
-**Task Create:** *POST* task/create
-
-Precisa do *Bearer Token*
-```bash
-{
-	"title": "Atividade",
-	"description": "Organizar exemplo 1.",
-	"status": "Pendente",
-	"priority": "Alto",
-	"due_date": "25-02-2024"
-}
-```
-Regras:
-
-* O campo *STATUS* só aceita: Pendente, Em andamento ou Concluido.
-* O campo *PRIORITY* só aceita: Baixo, Medio ou Alto.
-* O campo *DUE_DATE* pode ser nulo ou vazio.
-* O campo *DESCRIPTION* pode ser nulo ou vazio.
----
-
-**Task Update:** *POST* task/update/{task_id}
+**Task Create:** *POST* /tasks/create
 
 Precisa do *Bearer Token*
 ```bash
@@ -144,7 +124,27 @@ Regras:
 * O campo *DESCRIPTION* pode ser nulo ou vazio.
 ---
 
-**Task Delete:** *DELETE* task/delete/{task_id}
+**Task Update:** *POST* /tasks/update/{task_id}
+
+Precisa do *Bearer Token*
+```bash
+{
+	"title": "Atividade",
+	"description": "Organizar exemplo 1.",
+	"status": "Pendente",
+	"priority": "Alto",
+	"due_date": "25-02-2024"
+}
+```
+Regras:
+
+* O campo *STATUS* só aceita: Pendente, Em andamento ou Concluido.
+* O campo *PRIORITY* só aceita: Baixo, Medio ou Alto.
+* O campo *DUE_DATE* pode ser nulo ou vazio.
+* O campo *DESCRIPTION* pode ser nulo ou vazio.
+---
+
+**Task Delete:** *DELETE* /tasks/delete/{task_id}
 
 Precisa do *Bearer Token*
 

@@ -5,11 +5,8 @@ use App\Models\Task;
 
 class TaskRepository
 {
-    private $model;
-
-    public function __construct(Task $model){
-        $this->model = $model;
-    }
+    
+    public function __construct(protected Task $model){}
 
     public function find($id)
     {

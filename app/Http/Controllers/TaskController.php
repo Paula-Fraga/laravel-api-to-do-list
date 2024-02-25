@@ -14,20 +14,14 @@ use App\Services\Task\ListTaskService;
 
 class TaskController extends Controller
 {
-    private $create, $update, $delete, $list, $byid;
 
     public function __construct(
-        CreateTaskService $create,
-        UpdateTaskService $update,
-        DeleteTaskService $delete,
-        ListTaskService $list
+        protected CreateTaskService $create,
+        protected UpdateTaskService $update,
+        protected DeleteTaskService $delete,
+        protected ListTaskService $list
     )
-    {
-        $this->create = $create;
-        $this->update = $update;
-        $this->delete = $delete;
-        $this->list = $list;
-    }
+    {}
 
     public function create(TaskCreateRequest $request)
     {

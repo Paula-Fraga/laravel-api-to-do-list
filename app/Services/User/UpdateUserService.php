@@ -7,12 +7,8 @@ use App\Exceptions\BadUserIdException;
 
 class UpdateUserService 
 {
-    private $repository;
 
-    public function __construct(UserRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+    public function __construct(protected UserRepository $repository){}
 
     public function execute(array $credentials)
     {

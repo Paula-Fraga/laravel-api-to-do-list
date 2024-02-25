@@ -7,12 +7,8 @@ use App\Exceptions\ProblemIdException;
 
 class DeleteTaskService 
 {
-    private $repository;
 
-    public function __construct(TaskRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+    public function __construct(protected TaskRepository $repository){}
 
     public function execute(int $id)
     {

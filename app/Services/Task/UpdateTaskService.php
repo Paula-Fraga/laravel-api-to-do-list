@@ -7,12 +7,8 @@ use Carbon\Carbon;
 
 class UpdateTaskService 
 {
-    private $repository;
 
-    public function __construct(TaskRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+    public function __construct(protected TaskRepository $repository){}
 
     public function execute(array $credentials)
     {

@@ -6,12 +6,9 @@ use App\Repositories\TaskRepository;
 
 class ListTaskService 
 {
-    private $repository;
 
-    public function __construct(TaskRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+    public function __construct(protected TaskRepository $repository){}
+   
 
     public function execute($id = null)
     {

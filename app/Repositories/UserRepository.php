@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
-    private $model;
-
-    public function __construct(User $model){
-        $this->model = $model;
-    }
+    public function __construct(protected User $model){}
 
     public function create($date)
     {
