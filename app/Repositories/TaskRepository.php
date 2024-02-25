@@ -31,7 +31,7 @@ class TaskRepository
             'status' => $date['status'],
             'priority' => $date['priority'],
             'due_date' => $date['due_date'],
-            'user_id' => $date['user_id'],
+            'user_id' => auth()->user()->id,
         ]);
     }
 

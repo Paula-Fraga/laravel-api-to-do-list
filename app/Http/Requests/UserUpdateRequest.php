@@ -24,6 +24,7 @@ class UserUpdateRequest extends FormRequest
                 'email',
                 Rule::unique('users', 'email')->ignore($userId),
             ],
+            'password' => 'nullable|min:8'
         ];
     }
 
@@ -31,9 +32,12 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name.required' => 'The name field is required.',
+            'name.string' => 'The name must be a string.',
+            'name.max' => 'The name must not exceed :max characters.',
             'email.required' => 'The email field is required.',
             'email.email' => 'The email must be a valid email address.',
-            'email.unique' => 'The email has already been taken.',
+            'email.unique' => 'The email has already been taken for another user.',
+            'password.min' => 'The password must be at least :min characters.',
         ];
     }
 

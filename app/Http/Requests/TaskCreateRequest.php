@@ -21,7 +21,6 @@ class TaskCreateRequest extends FormRequest
             'status' => 'required|string|in:Pendente,Em andamento,Concluido',
             'priority' => 'required|string|in:Baixo,Medio,Alto',
             'due_date' => 'nullable|date',
-            'user_id' => 'required|integer|in:' . Auth::id(),
         ];
     }
 
@@ -40,9 +39,6 @@ class TaskCreateRequest extends FormRequest
             'priority.required' => 'The priority field is required.',
             'priority.in' => 'The priority must be "Baixo", "Medio", or "Alto".',
             'due_date.date' => 'The due date field must be a valid date.',
-            'user_id.required' => 'The user ID field is required.',
-            'user_id.integer' => 'The user ID field must be an integer.',
-            'user_id.in' => 'The user ID must be equal to the logged-in user ID.',
         ];
     }
 

@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 class TaskCreateDto implements Dto
 {
     public string $title;
-    public string $description;
+    public $description;
     public string $status;
     public string $priority;
     public $due_date;
-    public int $user_id;
 
     public function __construct($request)
     {
@@ -21,7 +20,6 @@ class TaskCreateDto implements Dto
         $this->status = $request->status;
         $this->priority = $request->priority;
         $this->due_date = $request->due_date;
-        $this->user_id = $request->user_id;
     }
 
     public function toArray(): array
@@ -32,7 +30,6 @@ class TaskCreateDto implements Dto
             'status' => $this->status,
             'priority' => $this->priority,
             'due_date' => $this->due_date,
-            'user_id' => $this->user_id,
         ];
     }
 }

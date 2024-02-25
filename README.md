@@ -1,66 +1,154 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sobre o projeto
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+O projeto é uma API de lista de tarefas, com login de usuário utilizando JWT e gerenciamento de tarefas.
 
-## About Laravel
+O sistema foi criado usando:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* PHP 8+
+* Laravel 10
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Configuração do Ambiente
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Ao clonar o repositório, instale as dependências do composer:**
+```bash
+git clone _url_
+```
+```bash
+composer install
+```
 
-## Learning Laravel
+**Configure o arquivo .env:**
+* Copie o arquivo .env.example para um novo arquivo chamado .env
+* Configure as variáveis de ambiente, incluindo as credenciais do banco de dados
+```bash
+ DB_CONNECTION=mysql
+ DB_HOST=127.0.0.1
+ DB_PORT=3306
+ DB_DATABASE=laravel
+ DB_USERNAME=root
+ DB_PASSWORD=
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Execute as migrações para preparar o banco de dados:**
+```bash
+php artisan migrate
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Endpoints da API
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Login:** *POST* /login
+```bash
+{
+	"email": "exemplo@gmail.com",
+	"password": "12345678"
+}
+```
+---
 
-## Laravel Sponsors
+**Me:** *POST* /me
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Precisa do *Bearer Token*
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+**Logout:** *POST* /logout
 
-## Contributing
+Precisa do *Bearer Token*
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+**User Create:** *POST* /user/create
+```bash
+{
+	"name": "Exemplo",
+	"email": "exemplo@gmail.com",
+	"password": "12345678"
+}
+```
+Regras:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* A senha precisa ter no mínimo 8 caracteres.
+* O e-mail não pode já estar cadastrado no sistema.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**User Update:** *PUT* /user/update/{user_id}
 
-## License
+Precisa do *Bearer Token*
+```bash
+{
+	"name": "Exemplo1",
+	"email": "exemplo@gmail.com"
+}
+```
+*Opcional*
+```bash
+"password": "12345678"
+```
+Regras:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* A senha precisa ter no mínimo 8 caracteres.
+* A senha é opcional colocar no json.
+* Caso ouver troca de email, não pode colocar um e-mail que já exista no sistema.
+---
+
+**Task List:** *GET* /task/list
+
+Precisa do *Bearer Token*
+
+---
+
+**Task By Id:** *GET* task/get/{task_id}
+
+Precisa do *Bearer Token*
+
+---
+
+**Task Create:** *POST* task/create
+
+Precisa do *Bearer Token*
+```bash
+{
+	"title": "Atividade",
+	"description": "Organizar exemplo 1.",
+	"status": "Pendente",
+	"priority": "Alto",
+	"due_date": "25-02-2024"
+}
+```
+Regras:
+
+* O campo *STATUS* só aceita: Pendente, Em andamento ou Concluido.
+* O campo *PRIORITY* só aceita: Baixo, Medio ou Alto.
+* O campo *DUE_DATE* pode ser nulo ou vazio.
+* O campo *DESCRIPTION* pode ser nulo ou vazio.
+---
+
+**Task Update:** *POST* task/update/{task_id}
+
+Precisa do *Bearer Token*
+```bash
+{
+	"title": "Atividade",
+	"description": "Organizar exemplo 1.",
+	"status": "Pendente",
+	"priority": "Alto",
+	"due_date": "25-02-2024"
+}
+```
+Regras:
+
+* O campo *STATUS* só aceita: Pendente, Em andamento ou Concluido.
+* O campo *PRIORITY* só aceita: Baixo, Medio ou Alto.
+* O campo *DUE_DATE* pode ser nulo ou vazio.
+* O campo *DESCRIPTION* pode ser nulo ou vazio.
+---
+
+**Task Delete:** *DELETE* task/delete/{task_id}
+
+Precisa do *Bearer Token*
+
+---
+## Considerações Finais
+
+Essa é apenas uma estrutura básica. Personalize-a conforme necessário para atender às peculiaridades da sua API, adicionando detalhes sobre os endpoints específicos, autenticação, autorização, etc.

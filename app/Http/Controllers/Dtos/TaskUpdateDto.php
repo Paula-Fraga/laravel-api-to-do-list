@@ -9,7 +9,7 @@ class TaskUpdateDto implements Dto
 {
     public int $id;
     public string $title;
-    public string $description;
+    public $description;
     public string $status;
     public string $priority;
     public $due_date;

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
@@ -29,7 +30,7 @@ class UserRepository
 
         if(isset($date['password']) && $date['password'])
         {
-            $tmp['password'] = $date['password'];
+            $tmp['password'] = Hash::make($date['password']);
         }
 
         return $this->model->where('id', $date['id'])
